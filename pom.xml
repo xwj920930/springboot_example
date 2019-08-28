@@ -11,6 +11,7 @@
   <modules>
     <module>rabbitmq</module>
     <module>jacoco</module>
+    <module>exception</module>
   </modules>
 
   <name>springboot-example-xwj</name>
