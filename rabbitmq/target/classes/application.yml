@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: spring-boot-rabbitmq
-  rabbitmq:
-    host: 192.168.203.241
-    port: 5672
-    username: admin
-    password: admin
-#可以参考https://blog.csdn.net/hellozpc/article/details/81436980#33Linux_91
