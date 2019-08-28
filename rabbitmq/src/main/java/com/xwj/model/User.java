@@ -2,9 +2,6 @@ package com.xwj.model;
 
 import java.io.Serializable;
 
-/**
- * Created by summer on 2016/11/29.
- */
 public class User implements Serializable{
 
     private String name;
