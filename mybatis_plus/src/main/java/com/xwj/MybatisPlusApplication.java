@@ -1,6 +1,5 @@
 package com.xwj;
 
-import org.junit.runner.RunWith;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,10 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class App 
+//@MapperScan("com.xwj.mybatis.mapper")
+public class MybatisPlusApplication
 {
     public static void main( String[] args )
     {
-        SpringApplication.run(App.class,args);
+        SpringApplication.run(MybatisPlusApplication.class , args);
     }
 }
