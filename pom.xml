@@ -12,7 +12,8 @@
     <module>rabbitmq</module>
     <module>jacoco</module>
     <module>exception</module>
-      <module>mybatis_plus</module>
+    <module>mybatis_plus</module>
+    <module>excel</module>
   </modules>
 
   <name>springboot-example-xwj</name>
@@ -29,6 +30,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <poi.version>3.13</poi.version>
+    <jxls.version>2.3.0</jxls.version>
+    <jxls-poi.version>1.0.9</jxls-poi.version>
     <mybatis-plus.version>3.1.1</mybatis-plus.version>
     <mysql-connector>8.0.17</mysql-connector>
     <fastjson.version>1.2.32</fastjson.version>
@@ -90,6 +93,28 @@
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
         <version>${fastjson.version}</version>
+      </dependency>
+      <!--poi相关-->
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>${poi.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>${poi.version}</version>
+      </dependency>
+      <!--jxls相关-->
+      <dependency>
+        <groupId>org.jxls</groupId>
+        <artifactId>jxls</artifactId>
+        <version>${jxls.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jxls</groupId>
+        <artifactId>jxls-poi</artifactId>
+        <version>${jxls-poi.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
