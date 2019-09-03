@@ -1,0 +1,5 @@
+spring:
+  data:
+    elasticsearch:
+#      cluster-name: araf-elasticsearch-dev
+      cluster-nodes: 192.168.203.241:9300

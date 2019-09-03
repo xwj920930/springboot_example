@@ -14,32 +14,11 @@
     <module>exception</module>
     <module>mybatis_plus</module>
     <module>excel</module>
+    <module>elasticsearch</module>
   </modules>
 
   <name>springboot-example-xwj</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.0.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <poi.version>3.13</poi.version>
-    <jxls.version>2.3.0</jxls.version>
-    <jxls-poi.version>1.0.9</jxls-poi.version>
-    <mybatis-plus.version>3.1.1</mybatis-plus.version>
-    <mysql-connector>8.0.17</mysql-connector>
-    <fastjson.version>1.2.32</fastjson.version>
-    <druid.version>1.1.10</druid.version>
-    <springboot.version>2.1.0.RELEASE</springboot.version>
-    <jacoco.version>0.8.2</jacoco.version>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <!--web相关-->
@@ -116,8 +95,36 @@
         <artifactId>jxls-poi</artifactId>
         <version>${jxls-poi.version}</version>
       </dependency>
+      <!--elasticsearch相关-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+  <url>http://www.example.com</url>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.0.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <poi.version>3.13</poi.version>
+    <jxls.version>2.3.0</jxls.version>
+    <jxls-poi.version>1.0.9</jxls-poi.version>
+    <mybatis-plus.version>3.1.1</mybatis-plus.version>
+    <mysql-connector>8.0.17</mysql-connector>
+    <fastjson.version>1.2.32</fastjson.version>
+    <druid.version>1.1.10</druid.version>
+    <springboot.version>2.1.0.RELEASE</springboot.version>
+    <jacoco.version>0.8.2</jacoco.version>
+  </properties>
 
   <build>
     <pluginManagement>
