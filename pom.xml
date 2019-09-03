@@ -4,10 +4,20 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.0.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
   <groupId>com.xwj</groupId>
   <artifactId>springboot-example-xwj</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+
+  <url>http://www.example.com</url>
+
   <modules>
     <module>rabbitmq</module>
     <module>jacoco</module>
@@ -15,16 +25,40 @@
     <module>mybatis_plus</module>
     <module>excel</module>
     <module>elasticsearch</module>
+      <module>websocket</module>
   </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <poi.version>3.13</poi.version>
+    <jxls.version>2.3.0</jxls.version>
+    <jxls-poi.version>1.0.9</jxls-poi.version>
+    <mybatis-plus.version>3.1.1</mybatis-plus.version>
+    <mysql-connector>8.0.17</mysql-connector>
+    <fastjson.version>1.2.32</fastjson.version>
+    <druid.version>1.1.10</druid.version>
+    <springboot.version>2.1.0.RELEASE</springboot.version>
+    <jacoco.version>0.8.2</jacoco.version>
+  </properties>
 
   <name>springboot-example-xwj</name>
   <!-- FIXME change it to the project's website -->
+
+  <!--dependencyManagement控制版本，需要version-->
   <dependencyManagement>
     <dependencies>
       <!--web相关-->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
+      <!--thymeleaf相关-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
         <version>${springboot.version}</version>
       </dependency>
       <!--测试相关-->
@@ -101,30 +135,14 @@
         <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         <version>${springboot.version}</version>
       </dependency>
+      <!--websocket相关-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-websocket</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
-  <url>http://www.example.com</url>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.0.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <poi.version>3.13</poi.version>
-    <jxls.version>2.3.0</jxls.version>
-    <jxls-poi.version>1.0.9</jxls-poi.version>
-    <mybatis-plus.version>3.1.1</mybatis-plus.version>
-    <mysql-connector>8.0.17</mysql-connector>
-    <fastjson.version>1.2.32</fastjson.version>
-    <druid.version>1.1.10</druid.version>
-    <springboot.version>2.1.0.RELEASE</springboot.version>
-    <jacoco.version>0.8.2</jacoco.version>
-  </properties>
 
   <build>
     <pluginManagement>
