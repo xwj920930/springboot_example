@@ -26,6 +26,7 @@
     <module>excel</module>
     <module>elasticsearch</module>
       <module>websocket</module>
+      <module>freemarker</module>
   </modules>
 
   <properties>
@@ -53,6 +54,12 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
+      <!--freemarker相关-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-freemarker</artifactId>
         <version>${springboot.version}</version>
       </dependency>
       <!--thymeleaf相关-->
