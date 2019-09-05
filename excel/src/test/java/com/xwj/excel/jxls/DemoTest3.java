@@ -3,23 +3,34 @@ package com.xwj.excel.jxls;
 import com.alibaba.fastjson.JSONArray;
 import com.xwj.excel.jxls.model.Summary;
 import com.xwj.excel.jxls.utils.JxlsUtils;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 /**
  * @Description 嵌套循环
  * 合并单元格的处理：先确定jx的模板再合并
  * 小计：必须在area范围内
  * @Author yuki
- * @Date 2018/10/29 15:48
- * @Version 1.0
  **/
-public class JxlsDemo3 {
-    public static void main(String[] args) throws IOException {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class DemoTest3 {
+    @Test
+    public void demo3Test() throws Exception{
+        URI inUri = Objects.requireNonNull(this.getClass().getClassLoader().getResource("summary_template.xls")).toURI();
+        InputStream in = Files.newInputStream(Paths.get(inUri));
+        String root = System.getProperty("user.dir");
+        String outFilePath = root+File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+ "summary_template_output.xls";
+        Files.createFile(Paths.get(outFilePath));
+        OutputStream os = Files.newOutputStream(Paths.get(outFilePath));
         String str="[\n" +
                 "    {\n" +
                 "        \"name\": \"admin\",\n" +
@@ -66,14 +77,11 @@ public class JxlsDemo3 {
                 "]";
         List<Summary> summaries= JSONArray.parseArray(str,Summary.class);
         System.out.println(summaries);
-
-        InputStream is=new FileInputStream("D:\\工作\\summary_template.xls");
-        OutputStream os = new FileOutputStream("D:\\工作\\summary_template_output.xls");
         Map<String , Object> model=new HashMap<>();
         model.put("summaries", summaries);
         model.put("nowdate", new Date());
-        JxlsUtils.exportExcel(is, os, model);
-        is.close();
+        JxlsUtils.exportExcel(in, os, model);
+        in.close();
         os.close();
     }
 }
