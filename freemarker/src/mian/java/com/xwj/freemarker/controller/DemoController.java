@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Controller
 public class DemoController {
@@ -26,6 +27,7 @@ public class DemoController {
     public String demo2(ModelMap map) {
         Demo demo=new Demo(1,"xwj",10000d, LocalDate.now());
         map.put("demo", demo);
+        map.put("now",new Date());
         return "demo";
     }
 }
