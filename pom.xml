@@ -25,8 +25,9 @@
     <module>mybatis_plus</module>
     <module>excel</module>
     <module>elasticsearch</module>
-      <module>websocket</module>
-      <module>freemarker</module>
+    <module>websocket</module>
+    <module>freemarker</module>
+    <module>thymeleaf</module>
   </modules>
 
   <properties>
