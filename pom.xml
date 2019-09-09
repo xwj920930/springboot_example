@@ -28,6 +28,7 @@
     <module>websocket</module>
     <module>freemarker</module>
     <module>thymeleaf</module>
+    <module>redis</module>
   </modules>
 
   <properties>
@@ -147,6 +148,12 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-websocket</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
+      <!--redis相关-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
         <version>${springboot.version}</version>
       </dependency>
     </dependencies>
