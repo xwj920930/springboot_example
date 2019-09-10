@@ -1,6 +1,7 @@
 package com.xwj.redis;
 
 import com.xwj.redis.model.User;
+import com.xwj.redis.utils.RedisUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,9 +32,15 @@ public class RedisTest {
 
     @Test
     public void testObj(){
-        User user=new User(1L,"许文杰123456","aa@126.com");
+        User user=new User(1L,"娃哈哈123456","aa@126.com");
         ValueOperations<String, User> operations=redisTemplate.opsForValue();
-        operations.set("xwj", user);
-        System.out.println(redisTemplate.opsForValue().get("xwj"));
+        operations.set("阿xwj", user);
+        System.out.println(redisTemplate.opsForValue().get("阿xwj"));
+    }
+
+    @Test
+    public void testByUtils(){
+        RedisUtil.set("xwj","许wj");
+        System.out.println(RedisUtil.get("xwj"));
     }
 }

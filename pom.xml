@@ -156,6 +156,12 @@
         <artifactId>spring-boot-starter-data-redis</artifactId>
         <version>${springboot.version}</version>
       </dependency>
+      <!--redis-session相关-->
+      <dependency>
+        <groupId>org.springframework.session</groupId>
+        <artifactId>spring-session-data-redis</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
