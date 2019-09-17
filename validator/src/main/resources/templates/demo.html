@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+<form action="/demoAdd" method="post" th:object="${demo}">
+    <p>序号：<input type="text" name="id" th:value="${demo.id}" /></p>
+    <p th:if="${#fields.hasErrors('id')}" th:errors="${demo.id}">ID Error</p>
+
+    <p>姓名：<input type="text" name="name" th:value="${demo.name}" /></p>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="${demo.name}">Name Error</p>
+
+    <!--<p>姓名：<input type="text" name="name" th:value="*{name}" />-->
+    <!--</p>-->
+    <!--<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>-->
+    <!---->
+    <!--<p>密码：<input type="text" name="password" th:value="*{password}"  />-->
+    <!--</p>-->
+    <!--<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</p>-->
+    <p><button>提交</button></p>
+</form>
+</body>
+</html>

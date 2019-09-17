@@ -29,6 +29,7 @@
     <module>freemarker</module>
     <module>thymeleaf</module>
     <module>redis</module>
+    <module>validator</module>
   </modules>
 
   <properties>
