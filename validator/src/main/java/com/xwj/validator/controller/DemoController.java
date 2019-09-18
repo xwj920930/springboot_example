@@ -33,4 +33,10 @@ public class DemoController {
         model.addObject("demo",demo);
         return model;
     }
+    //postman测试用(通用异常返回)
+    @PostMapping("/demo2")
+    @ResponseBody
+    public String demo2(@Valid Demo demo){
+        return "ok";
+    }
 }
