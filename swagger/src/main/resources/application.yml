@@ -1,0 +1,4 @@
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
+    #处理高版本swagger实体类integer报错
