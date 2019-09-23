@@ -31,6 +31,7 @@
     <module>redis</module>
     <module>validator</module>
     <module>swagger</module>
+    <module>mockmvc</module>
   </modules>
 
   <properties>

@@ -1,16 +1,11 @@
-package com.xwj;
+package com.xwj.mockmvc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Hello world!
- *
- */
 @SpringBootApplication
-//@MapperScan("com.xwj.mybatis.mapper")
-public class MybatisPlusApplication {
+public class MockMvcApplication {
     public static void main( String[] args ) {
-        SpringApplication.run(MybatisPlusApplication.class , args);
+        SpringApplication.run(MockMvcApplication.class , args);
     }
 }
