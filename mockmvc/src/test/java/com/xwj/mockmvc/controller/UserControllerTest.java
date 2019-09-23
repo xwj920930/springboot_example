@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -17,6 +18,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.io.InputStream;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 import static org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder.webAppContextSetup;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -71,37 +78,35 @@ public class UserControllerTest {
     //一些常用的测试
 
     //测试普通控制器
+    @Test
     public void normal() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.delete("/user/del/1")) //执行请求
-                .andExpect(model().attributeExists("user")) //验证存储模型数据
-                .andExpect(view().name("user/view")) //验证viewName
-                .andExpect(forwardedUrl("/WEB-INF/jsp/user/view.jsp"))//验证视图渲染时forward到的jsp
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/hello")) //执行请求
+                .andExpect(model().attributeExists("xwj")) //验证存储模型数据
+                .andExpect(view().name("demo")) //验证viewName
+                .andExpect(forwardedUrl("demo"))//验证视图渲染时forward到的页面
+                .andExpect(handler().handlerType(UserController.class)) //验证执行的控制器类型
                 .andExpect(status().isOk())//验证状态码
+                .andExpect(handler().methodName("hello")) //验证执行的控制器方法名
+                .andExpect(model().hasNoErrors()) //验证页面没有错误
+//                .andExpect(flash().attributeExists("success")) //验证存在flash属性
                 .andDo(print()); //输出MvcResult到控制台
     }
 
     //得到MvcResult自定义验证
+    @Test
     public void define() throws Exception{
-        MvcResult result = mockMvc.perform(get("/user/{id}", 1))//执行请求
+        MvcResult result = mockMvc.perform(get("/user/hello"))//执行请求
                 .andReturn(); //返回MvcResult
-        Assert.assertNotNull(result.getModelAndView().getModel().get("user")); //自定义断言
+        Assert.assertNotNull(result.getModelAndView().getModel().get("xwj")); //自定义断言
     }
 
-    //验证请求参数绑定到模型数据及Flash属性
-    public void modelData() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.post("/user").param("name", "zhang")) //执行传递参数的POST请求(也可以post("/user?name=zhang"))
-                .andExpect(handler().handlerType(UserController.class)) //验证执行的控制器类型
-                .andExpect(handler().methodName("create")) //验证执行的控制器方法名
-                .andExpect(model().hasNoErrors()) //验证页面没有错误
-                .andExpect(flash().attributeExists("success")) //验证存在flash属性
-                .andExpect(view().name("redirect:/user")); //验证视图
-    }
-
-    //文件上传
+    //文件上传 todo
+    @Test
     public void file() throws Exception {
-        byte[] bytes = new byte[] {1, 2};
-        mockMvc.perform(MockMvcRequestBuilders.multipart("")) //执行文件上传
-                .andExpect(model().attribute("icon", bytes)) //验证属性相等性
+        URI uri = Objects.requireNonNull(this.getClass().getClassLoader().getResource("eolinker信息.xlsx")).toURI();
+        InputStream stream = Files.newInputStream(Paths.get(uri));
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/user/file")
+                .file(new MockMultipartFile("eolinker信息.xlsx",stream))) //执行文件上传
                 .andExpect(view().name("success")); //验证视图
     }
 
