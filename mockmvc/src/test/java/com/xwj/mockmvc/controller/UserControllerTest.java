@@ -1,7 +1,5 @@
 package com.xwj.mockmvc.controller;
 
-import com.xwj.mockmvc.model.User;
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,14 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.InputStream;
@@ -25,8 +20,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import static org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder.webAppContextSetup;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -85,7 +80,7 @@ public class UserControllerTest {
                 .andExpect(view().name("demo")) //验证viewName
                 .andExpect(forwardedUrl("demo"))//验证视图渲染时forward到的页面
                 .andExpect(handler().handlerType(UserController.class)) //验证执行的控制器类型
-                .andExpect(status().isOk())//验证状态码
+                .andExpect(status().isOk())//验证状态码，也可用于自定义异常验证
                 .andExpect(handler().methodName("hello")) //验证执行的控制器方法名
                 .andExpect(model().hasNoErrors()) //验证页面没有错误
 //                .andExpect(flash().attributeExists("success")) //验证存在flash属性
@@ -100,59 +95,39 @@ public class UserControllerTest {
         Assert.assertNotNull(result.getModelAndView().getModel().get("xwj")); //自定义断言
     }
 
-    //文件上传 todo
+    //文件上传
     @Test
     public void file() throws Exception {
         URI uri = Objects.requireNonNull(this.getClass().getClassLoader().getResource("eolinker信息.xlsx")).toURI();
         InputStream stream = Files.newInputStream(Paths.get(uri));
-        mockMvc.perform(MockMvcRequestBuilders.multipart("/user/file")
-                .file(new MockMultipartFile("eolinker信息.xlsx",stream))) //执行文件上传
-                .andExpect(view().name("success")); //验证视图
+        mockMvc.perform(multipart("/user/file")
+                .file(new MockMultipartFile("file", "eolinker信息.xlsx", MediaType.MULTIPART_FORM_DATA_VALUE, stream)))
+                .andExpect(status().isOk());
     }
 
     //JSON请求/响应验证
+    @Test
     public void json() throws Exception {
         String requestBody = "{\"id\":1, \"name\":\"zhang\"}";
-        mockMvc.perform(MockMvcRequestBuilders.post("/user")
-                .contentType(MediaType.APPLICATION_JSON).content(requestBody)
-                .accept(MediaType.APPLICATION_JSON)) //执行请求
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON)) //验证响应contentType
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/json")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(requestBody)
+                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE)) //执行请求
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)) //验证响应contentType
                 .andExpect(jsonPath("$.id").value(1)); //使用Json path验证JSON 请参考http://goessner.net/articles/JsonPath/
-
-        String errorBody = "{id:1, name:zhang}";
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user")
-                .contentType(MediaType.APPLICATION_JSON).content(errorBody)
-                .accept(MediaType.APPLICATION_JSON)) //执行请求
-                .andExpect(status().isBadRequest()) //400错误请求
-                .andReturn();
-
-        Assert.assertTrue(HttpMessageNotReadableException.class.isAssignableFrom(result.getResolvedException().getClass()));//错误的请求内容体
     }
 
-    //异步测试
-    public void asyn() throws Exception{
-        //Callable
-        MvcResult result = mockMvc.perform(get("/user/async1?id=1&name=zhang")) //执行请求
-                .andExpect(request().asyncStarted())
-                .andExpect(request().asyncResult(CoreMatchers.instanceOf(User.class))) //默认会等10秒超时
-                .andReturn();
-
-        mockMvc.perform(asyncDispatch(result))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(1));
-    }
-
-    //全局配置
-    public void config() throws Exception{
-//        mockMvc = webAppContextSetup(wac)
-//                .defaultRequest(get("/user/1").requestAttr("default", true)) //默认请求 如果其是Mergeable类型的，会自动合并的哦mockMvc.perform中的RequestBuilder
-//                .alwaysDo(print())  //默认每次执行请求后都做的动作
-//                .alwaysExpect(request().attribute("default", true)) //默认每次执行后进行验证的断言
-//                .build();
+    //异步测试，有问题，暂时不讨论
+//    @Test
+//    public void asyn() throws Exception{
+//        //Callable
+//        MvcResult result = mockMvc.perform(get("/user/asyn?id=1&name=zhang")) //执行请求
+//                .andExpect(request().asyncStarted())
+//                .andExpect(request().asyncResult(CoreMatchers.instanceOf(User.class))) //默认会等10秒超时
+//                .andReturn();
 //
-//        mockMvc.perform(get("/user/1"))
-//                .andExpect(model().attributeExists("user"));
-
-    }
+//        mockMvc.perform(asyncDispatch(result))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$.id").value(1));
+//    }
 }

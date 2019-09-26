@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 
 @Controller
 @RequestMapping("/user")
@@ -71,4 +71,17 @@ public class UserController {
     public String file(@RequestParam("file")MultipartFile multipartFile){
         return "upload file success";
     }
+
+    @PostMapping(value = "/json",produces = "application/json;charset=UTF-8")
+    @ResponseBody//也可以使用@RequestBody alibaba.JSONObject jsonObject接收，但没必要
+    public User jsonObject(@RequestBody User user){
+        return user;
+    }
+
+//    @GetMapping(value = "/asyn")
+//    @ResponseBody//get?a=a&b=b也可直接使用User user接收
+//    public User asyn(@RequestParam("id") Integer id,@RequestParam("name") String name){
+//        User user = new User(id,name);
+//        return user;
+//    }
 }
