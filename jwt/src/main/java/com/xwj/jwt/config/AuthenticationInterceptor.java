@@ -2,7 +2,6 @@ package com.xwj.jwt.config;
 
 
 import com.xwj.jwt.utils.JwtUtil;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.web.method.HandlerMethod;
