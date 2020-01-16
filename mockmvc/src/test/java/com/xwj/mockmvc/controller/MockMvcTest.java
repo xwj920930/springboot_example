@@ -1,14 +1,11 @@
 package com.xwj.mockmvc.controller;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -50,14 +47,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest {
+public class MockMvcTest {
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
-    @MockBean
-    private UserController userController;
 
     @Test
     public void list() throws Exception {
@@ -126,17 +121,6 @@ public class UserControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE)) //执行请求
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)) //验证响应contentType
                 .andExpect(jsonPath("$.id").value(1)); //使用Json path验证JSON 请参考http://goessner.net/articles/JsonPath/
-    }
-
-    //测试mockBean: 创建一个虚拟的controller,service替代那些暂未完成的方法
-    // 在实际开发中，我们自己写的Controller、Service很可能去调用别的同事或别的项目组写的Service、Mapper
-    // ，对方可能只写了一个接口，没有实现，这样是没法进行测试的。
-    @Test
-    public void mockBean() throws Exception {
-        Mockito.when(userController.delete(1)).thenReturn("虚拟的删除");
-        TestCase.assertEquals("虚拟的删除", userController.delete(1));
-        mockMvc.perform(MockMvcRequestBuilders.delete("/user/del/1"))
-                .andExpect(status().isOk());
     }
 
     //异步测试，有问题，暂时不讨论
