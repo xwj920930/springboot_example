@@ -1,6 +1,8 @@
 package com.xwj.mockmvc.controller;
 
 import com.xwj.mockmvc.model.User;
+import com.xwj.mockmvc.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,8 @@ public class UserController {
 
     // 创建线程安全的map
     private static Map<Integer, User> users = new ConcurrentHashMap<>();
+    @Autowired
+    private UserService userService;
 
     /**
      * 查询用户列表
@@ -84,4 +88,13 @@ public class UserController {
 //        User user = new User(id,name);
 //        return user;
 //    }
+    /**
+     * 测试依赖问题
+     */
+    @GetMapping(value = "/dependent")
+    @ResponseBody
+    public User dependent(){
+        System.out.println("UserController.dependent");
+        return userService.getUser();
+    }
 }

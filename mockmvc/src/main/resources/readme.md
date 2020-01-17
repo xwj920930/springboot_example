@@ -28,7 +28,6 @@ Controller的调用，使得测试速度快、不依赖网络环境。同时提�
 
 **Mockito**
 用于构建方法，实现了对方法的模拟(controller，service，dao)
-Mockito.when：构造模拟方法的行为
 
 **@Mock**
 作用和Mockito相同，只是为注解模式，需要初始化。

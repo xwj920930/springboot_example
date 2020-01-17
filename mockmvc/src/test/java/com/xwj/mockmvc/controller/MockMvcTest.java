@@ -57,15 +57,15 @@ public class MockMvcTest {
     @Test
     public void list() throws Exception {
         post();
-        mockMvc.perform(get("/user/list"))//get可以简写
-                .andExpect(status().is(200))//status可以自定义
-                .andDo(print());
+        mockMvc.perform(get("/user/list"))//get可以简写，perform模拟发送请求
+                .andExpect(status().is(200))//status可以自定义，期望返回的数据
+                .andDo(print());//输出MvcResult到控制台
     }
 
     @Test
     public void post() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/post")
-                .param("id", "1")
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/post")//发送请求
+                .param("id", "1")//参数
                 .param("name", "xwj1"))
                 .andExpect(status().isOk());
     }
