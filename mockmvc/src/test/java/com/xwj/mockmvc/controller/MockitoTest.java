@@ -8,12 +8,16 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -60,6 +64,7 @@ public class MockitoTest {
         TestCase.assertEquals("234", mock.getUser().getName());
     }
 
+    //验证异常
     @Test(expected = NullPointerException.class)
     public void exception(){
         UserService mock = Mockito.mock(UserService.class);
@@ -67,7 +72,7 @@ public class MockitoTest {
         mock.exception();
     }
 
-    //模拟普通对象的嵌套调用
+    //使用RETURNS_DEEP_STUBS模拟普通对象的嵌套调用
     @Test
     public void deepStubsTest(){
         A a=Mockito.mock(A.class,Mockito.RETURNS_DEEP_STUBS);
@@ -90,6 +95,14 @@ public class MockitoTest {
         TestCase.assertEquals("xwj", name);
     }
 
+    @Test
+    public void any(){
+        List list = Mockito.mock(List.class);
+        Mockito.when(list.get(Mockito.anyInt())).thenReturn(1);
+        TestCase.assertEquals(1, list.get(0));
+        TestCase.assertEquals(1, list.get(99));
+    }
+
     //不做任何返回
     @Test
     public void doNothing() {
@@ -100,6 +113,55 @@ public class MockitoTest {
         TestCase.assertNull(b.getName());
     }
 
+    //自定义参数匹配
+    @Test
+    public void argumentMatchersTest() {
+        //创建mock对象
+        List mock = Mockito.mock(List.class);
+        //argThat(Matches<T> matcher)方法用来应用自定义的规则，可以传入任何实现Matcher接口的实现类。
+        Mockito.when(mock.addAll(Mockito.argThat(new IsListOfTwoElements()))).thenReturn(true);
+        TestCase.assertTrue(mock.addAll(Arrays.asList("one", "two", "three")));
+    }
+
+    static class IsListOfTwoElements implements ArgumentMatcher<List> {
+        @Override
+        public boolean matches(List list) {
+            return list.size() == 3;
+        }
+    }
+
+    //预期回调接口生成期望值
+    @Test
+    public void answer_with_callback() {
+        List mockList = Mockito.mock(List.class);
+        //使用Answer来生成我们我们期望的返回
+        Mockito.when(mockList.get(Mockito.anyInt())).thenAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            return "hello world:" + args[0];
+        });
+        TestCase.assertEquals("hello world:0", mockList.get(0));
+        TestCase.assertEquals("hello world:999", mockList.get(999));
+        //下面写法类似，但是有问题
+//        Mockito.doAnswer(invocation -> {
+//            Object[] args = invocation.getArguments();
+//            return "hello world:" + args[0];
+//        }).when(mockList.get(Mockito.anyInt()));
+//        TestCase.assertEquals("hello world:0", mockList.get(0));
+//        TestCase.assertEquals("hello world:999", mockList.get(999));
+    }
+
+    //上面的简洁写法
+    @Test
+    public void A(){
+        //mock对象使用Answer来对未预设的调用返回默认期望值
+        List mock = Mockito.mock(List.class, invocation -> 999);
+         //下面的get(1)没有预设，通常情况下会返回NULL，但是使用了Answer改变了默认期望值
+         TestCase.assertEquals(999, mock.get(1));
+         //下面的size()没有预设，通常情况下会返回0，但是使用了Answer改变了默认期望值
+         TestCase.assertEquals(999,mock.size());
+    }
+
+    //匹配任意
     @Test(expected = IndexOutOfBoundsException.class)
     public void spy_on_real_objects(){
         List<Integer> list = new LinkedList<>();
