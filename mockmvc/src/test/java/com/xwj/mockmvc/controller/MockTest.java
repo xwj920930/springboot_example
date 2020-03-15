@@ -1,5 +1,6 @@
 package com.xwj.mockmvc.controller;
 
+import com.xwj.mockmvc.service.UserService;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ public class MockTest {
     private List<Integer> mockList;
 
     @Mock
-    private UserController userController;
+    private UserService userService;
 
     //初始化方式3
 //    public MockTest(){
@@ -39,6 +40,14 @@ public class MockTest {
         mockList.add(1);
         //验证方法是否执行
         Mockito.verify(mockList).add(1);
+    }
+
+    @Test
+    public void mockTestService(){
+        //调用mock对象的方法模拟,常用于引用外部接口
+        Mockito.when(userService.getName()).thenReturn("123");
+        //验证
+        TestCase.assertEquals("123", userService.getName());
     }
 
 }

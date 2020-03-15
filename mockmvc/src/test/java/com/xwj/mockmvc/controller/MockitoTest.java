@@ -25,6 +25,7 @@ import java.util.List;
 /*
  * 常用方法：
  * Mockito.mock(classToMock)	模拟对象
+ * Mockito.anyString()	模拟入参
  * Mockito.mock(classToMock,defaultAnswer)	使用默认Answer模拟对象
  * Mockito.verify(mock)	验证行为是否发生
  * Mockito.when(methodCall)	模拟调用对象
