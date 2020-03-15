@@ -32,6 +32,7 @@
     <module>validator</module>
     <module>swagger</module>
     <module>mockmvc</module>
+    <module>jwt</module>
   </modules>
 
   <properties>
