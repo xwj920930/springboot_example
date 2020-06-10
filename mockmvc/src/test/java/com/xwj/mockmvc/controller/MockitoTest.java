@@ -45,6 +45,13 @@ import java.util.List;
 public class MockitoTest {
     @Spy
     private UserService userService;
+    /*
+    @Spy修饰的外部类，必须是真实存在的
+    @Mock修饰的外部类,是完全模拟出来的，就算项目中没有这个类的实例，也能自己mock出来一个
+
+    when().thenReturn() 会先执行一遍when里面的语句
+    doReturn().when()   直接执行return
+    * */
 
     //Mockito.verify(mock)	验证行为是否发生
     @Test
