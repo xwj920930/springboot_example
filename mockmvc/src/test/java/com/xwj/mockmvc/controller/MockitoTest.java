@@ -5,18 +5,14 @@ import com.xwj.mockmvc.model.B;
 import com.xwj.mockmvc.model.User;
 import com.xwj.mockmvc.service.UserService;
 import junit.framework.TestCase;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -63,11 +59,11 @@ public class MockitoTest {
         Mockito.verify(mock).getUser();
     }
 
-    //Mockito.when(methodCall).thenReturn(value1).thenReturn(value2)	触发时第一次返回value1，第n次都返回value2
+    //Mockito.when(methodCall).thenReturn(value1, value2)	触发时第一次返回value1，第n次都返回value2
     @Test
     public void when(){
         UserService mock = Mockito.mock(UserService.class);
-        Mockito.when(mock.getUser()).thenReturn(new User(1, "123")).thenReturn(new User(2, "234"));
+        Mockito.when(mock.getUser()).thenReturn(new User(1, "123"), new User(2, "234"));
         TestCase.assertEquals("123", mock.getUser().getName());
         TestCase.assertEquals("234", mock.getUser().getName());
     }
