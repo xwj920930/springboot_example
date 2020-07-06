@@ -16,4 +16,6 @@ public class UserService{
     public String getName(){
         return "xwj";
     }
+
+    public void setName() {getUser().setName("123");}
 }

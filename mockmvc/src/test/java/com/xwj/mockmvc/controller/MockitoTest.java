@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,6 +42,9 @@ import java.util.List;
 public class MockitoTest {
     @Spy
     private UserService userService;
+
+    @Mock
+    private UserService userService1;
     /*
     @Spy修饰的外部类，必须是真实存在的
     @Mock修饰的外部类,是完全模拟出来的，就算项目中没有这个类的实例，也能自己mock出来一个
@@ -211,6 +215,12 @@ public class MockitoTest {
         TestCase.assertEquals(1, spy.get(0).intValue());
         TestCase.assertEquals(2, spy.get(1).intValue());
         TestCase.assertEquals(999, spy.get(999).intValue());
+    }
+
+    //Mockito.doNothing().when(mock).[method]	返回值为void的方法调用
+    @Test
+    public void mockVoid(){
+        Mockito.doNothing().when(userService).setName();
     }
 
 }
