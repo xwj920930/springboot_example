@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+    <body>
+    <p>用于service分组校验(id，用户名)</p>
+    <form action="/demoAddServiceGroup" method="post" th:object="${demo}">
+        <p>序号：<input type="number" name="user.id" th:value="${demo.user.id}" /></p>
+        <p th:if="${#fields.hasErrors('user.id')}" th:errors="${demo.user.id}">ID Error</p>
+
+        <p>姓名：<input type="text" name="user.name" th:value="${demo.user.name}" /></p>
+        <p th:if="${#fields.hasErrors('user.name')}" th:errors="${demo.user.name}">Name Error</p>
+
+        <p>价格：<input type="text" name="price" th:value="${demo.price}" /></p>
+        <p th:if="${#fields.hasErrors('price')}" th:errors="${demo.price}">Price Error</p>
+
+        <p>邮箱：<input type="text" name="email" th:value="${demo.email}"  /></p>
+        <p th:if="${#fields.hasErrors('email')}" th:errors="${demo.email}">Email Error</p>
+
+        <p><button>提交</button></p>
+    </form>
+    </body>
+</html>

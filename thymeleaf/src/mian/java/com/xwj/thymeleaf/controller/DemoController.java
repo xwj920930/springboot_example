@@ -1,6 +1,7 @@
 package com.xwj.thymeleaf.controller;
 
 import com.xwj.thymeleaf.model.Demo;
+import com.xwj.thymeleaf.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,8 @@ public class DemoController {
     @GetMapping("/demo")
     public ModelAndView demo(){
         ModelAndView modelAndView=new ModelAndView();
-        Demo demo=new Demo(1,"xwj",10000d, LocalDate.now());
+        User user = new User(1, "xwj");
+        Demo demo=new Demo(user,10000d, LocalDate.now());
         modelAndView.addObject("demo",demo);
         modelAndView.setViewName("demo");
         return modelAndView;
@@ -25,7 +27,8 @@ public class DemoController {
     }
     @GetMapping("/demo2")
     public String demo2(ModelMap map) {
-        Demo demo=new Demo(1,"xwj",10000d, LocalDate.now());
+        User user = new User(1, "xwj");
+        Demo demo=new Demo(user,10000d, LocalDate.now());
         map.put("demo", demo);
         map.put("now",new Date());
         return "demo";

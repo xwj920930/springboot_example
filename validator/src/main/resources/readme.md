@@ -25,3 +25,7 @@
 @NotNull(message = "身份证不能为空") 
 
 @Pattern(regexp="^(\\d{18,18}|\\d{15,15}|(\\d{17,17}[x|X]))$", message="身份证格式错误")
+
+@Valid 支持嵌套校验
+
+@Validated 支持分组(controller层和service层)

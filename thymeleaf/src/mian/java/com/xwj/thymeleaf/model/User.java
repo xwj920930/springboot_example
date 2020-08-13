@@ -8,8 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class Demo implements Serializable {
-    private User user;
-    private double price;
-    private LocalDate date;
+public class User implements Serializable {
+    private int id;
+    private String name;
 }

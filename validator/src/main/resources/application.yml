@@ -1,0 +1,3 @@
+#spring:
+#  thymeleaf:
+#    prefix: classpath:/templates/ #默认值为templates

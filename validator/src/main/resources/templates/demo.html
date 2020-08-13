@@ -5,12 +5,13 @@
     <title></title>
 </head>
     <body>
+    <p>用于普通校验(邮件)</p>
         <form action="/demoAdd" method="post" th:object="${demo}">
-            <p>序号：<input type="text" name="id" th:value="${demo.id}" /></p>
-            <p th:if="${#fields.hasErrors('id')}" th:errors="${demo.id}">ID Error</p>
+            <p>序号：<input type="number" name="user.id" th:value="${demo.user.id}" /></p>
+            <p th:if="${#fields.hasErrors('user.id')}" th:errors="${demo.user.id}">ID Error</p>
 
-            <p>姓名：<input type="text" name="name" th:value="${demo.name}" /></p>
-            <p th:if="${#fields.hasErrors('name')}" th:errors="${demo.name}">Name Error</p>
+            <p>姓名：<input type="text" name="user.name" th:value="${demo.user.name}" /></p>
+            <p th:if="${#fields.hasErrors('user.name')}" th:errors="${demo.user.name}">Name Error</p>
 
             <p>价格：<input type="text" name="price" th:value="${demo.price}" /></p>
             <p th:if="${#fields.hasErrors('price')}" th:errors="${demo.price}">Price Error</p>
