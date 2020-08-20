@@ -34,3 +34,7 @@ Controller的调用，使得测试速度快、不依赖网络环境。同时提�
 
 **@MockBean**
 如果你的测试需要依赖Spring容器，想添加或模拟其中一个容器管理的bean
+
+**InjectMocks**
+@Autowird 等方式完成自动注入。在单元测试中，没有启动 spring 框架，此时就需要通过 
+@ InjectMocks完成依赖注入。

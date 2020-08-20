@@ -35,6 +35,7 @@ import java.util.List;
  * Mockito.doCallRealMethod().when(mock).[method] //等价于Mockito.when(mock.[method]).thenCallRealMethod();	调用真实的方法
  * Mockito.spy(Object)	用spy监控真实对象,设置真实对象行为
  * reset(mock)	重置mock
+ * @InjectMocks 功能类似@Autowird
  */
 
 @RunWith(SpringRunner.class)
