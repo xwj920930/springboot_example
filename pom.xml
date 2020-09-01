@@ -33,6 +33,7 @@
     <module>swagger</module>
     <module>mockmvc</module>
     <module>jwt</module>
+    <module>scheduled</module>
   </modules>
 
   <properties>
