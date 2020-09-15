@@ -21,3 +21,5 @@ ServletRequestListener：用来监听 Request 对象的属性操作。
 
 **ApplicationEventPublisher**
 可作为观察者模式的一个实现方式，用于业务代码的监听。
+
+其他常用spring方法可以参见SpringWebTest工程
