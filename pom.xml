@@ -34,7 +34,7 @@
     <module>mockmvc</module>
     <module>jwt</module>
     <module>scheduled</module>
-    <module>practical</module>
+    <module>filter</module>
   </modules>
 
   <properties>
