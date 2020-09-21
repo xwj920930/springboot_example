@@ -35,6 +35,7 @@
     <module>jwt</module>
     <module>scheduled</module>
     <module>filter</module>
+    <module>publisher</module>
   </modules>
 
   <properties>
