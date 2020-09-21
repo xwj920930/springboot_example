@@ -1,8 +1,8 @@
-package com.example.practical.Config;
+package com.example.filter.Config;
 
-import com.example.practical.Filter.MyFilter;
-import com.example.practical.Interceptor.MyInterceptor;
-import com.example.practical.Listener.MyListener;
+import com.example.filter.Filter.MyFilter;
+import com.example.filter.Interceptor.MyInterceptor;
+import com.example.filter.Listener.MyListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;

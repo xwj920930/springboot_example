@@ -1,6 +1,6 @@
-package com.example.practical.Controller;
+package com.example.filter.Controller;
 
-import com.example.practical.Listener.MyListener;
+import com.example.filter.Listener.MyListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
