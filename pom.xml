@@ -36,6 +36,8 @@
     <module>scheduled</module>
     <module>filter</module>
     <module>publisher</module>
+    <module>cache</module>
+    <module>aop</module>
   </modules>
 
   <properties>
