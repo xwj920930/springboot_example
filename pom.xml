@@ -38,6 +38,7 @@
     <module>publisher</module>
     <module>cache</module>
     <module>aop</module>
+    <module>async</module>
   </modules>
 
   <properties>
