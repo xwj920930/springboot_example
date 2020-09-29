@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: error
+    # 全局(包括系统)级别日志设置为error
+    com:
+      example:
+        xwj:
+          log:
+            controller: info
+  #地址为C:\Users\yuki\logs
+  file: ${user.home}/logs/hello.log

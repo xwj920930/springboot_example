@@ -39,6 +39,7 @@
     <module>cache</module>
     <module>aop</module>
     <module>async</module>
+    <module>log</module>
   </modules>
 
   <properties>
