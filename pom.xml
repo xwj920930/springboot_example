@@ -41,6 +41,8 @@
     <module>async</module>
     <module>log</module>
     <module>email</module>
+    <module>admin-server</module>
+    <module>admin-client</module>
   </modules>
 
   <properties>
@@ -58,6 +60,7 @@
     <jacoco.version>0.8.2</jacoco.version>
     <swagger.version>2.9.2</swagger.version>
     <jwt.version>0.9.0</jwt.version>
+    <admin.version>2.1.0</admin.version>
   </properties>
 
   <name>springboot-example-xwj</name>
@@ -191,6 +194,22 @@
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt</artifactId>
         <version>${jwt.version}</version>
+      </dependency>
+      <!--admin监控-->
+      <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-server</artifactId>
+        <version>${admin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-server-ui</artifactId>
+        <version>${admin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-starter-client</artifactId>
+        <version>${admin.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
