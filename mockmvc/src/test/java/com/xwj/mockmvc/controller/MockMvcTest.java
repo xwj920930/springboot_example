@@ -85,7 +85,7 @@ public class MockMvcTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/user/hello")) //执行请求
                 .andExpect(model().attributeExists("xwj")) //验证存储模型数据
                 .andExpect(view().name("demo")) //验证viewName
-                .andExpect(forwardedUrl("demo"))//验证视图渲染时forward到的页面
+//                .andExpect(forwardedUrl("demo"))//验证视图渲染时forward到的页面
                 .andExpect(handler().handlerType(UserController.class)) //验证执行的控制器类型
                 .andExpect(status().isOk())//验证状态码，也可用于自定义异常验证
                 .andExpect(handler().methodName("hello")) //验证执行的控制器方法名

@@ -94,7 +94,19 @@ public class UserController {
     @GetMapping(value = "/dependent")
     @ResponseBody
     public User dependent(){
-        System.out.println("UserController.dependent");
-        return userService.getUser();
+        User user = userService.getUser();
+        System.out.println("UserController.dependent："+user);
+        return user;
+    }
+
+    /**
+     * 测试依赖问题
+     */
+    @GetMapping(value = "/dependent2")
+    @ResponseBody
+    public String dependent2(){
+        String dependName = userService.getDependName();
+        System.out.println("UserController.dependent2: "+dependName);
+        return dependName;
     }
 }
