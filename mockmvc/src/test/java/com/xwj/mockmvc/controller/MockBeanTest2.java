@@ -21,6 +21,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * 如果测试需要依赖于Spring Boot容器，并且您还想添加或模拟其中一个容器bean，使用@MockBean。
  * 如果需要使用MockBean注解,需要使用SpringRunner
  * @MockBean类似于简化版的@InjectMocks
+ *
+ * @Mock SampleDependency dependency;
+   @InjectMocks SampleService sampleService;  等价于   @MockBean SampleDependency dependency;
  */
 
 @RunWith(SpringRunner.class)
