@@ -45,6 +45,7 @@
     <module>admin-client</module>
     <module>mongodb</module>
     <module>kafka</module>
+    <module>demo</module>
   </modules>
 
   <properties>
