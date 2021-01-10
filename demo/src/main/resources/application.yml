@@ -1,0 +1,6 @@
+server:
+  port: 8088
+
+student:
+    age: 18
+    name: xwj
