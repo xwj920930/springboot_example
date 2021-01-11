@@ -1,6 +1,8 @@
 server:
   port: 8088
-
+  servlet:
+    path: /  # 拦截路径
+    context-path: /springboot-demo  # 项目前缀
 student:
     age: 18
     name: xwj
