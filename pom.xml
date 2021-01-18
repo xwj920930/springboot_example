@@ -46,6 +46,7 @@
     <module>mongodb</module>
     <module>kafka</module>
     <module>demo</module>
+    <module>rest</module>
   </modules>
 
   <properties>

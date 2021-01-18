@@ -13,8 +13,8 @@ public class Property2 {
     @Autowired
     private Student student;
     @GetMapping("student")
-    public String student(){
-        return student.toString();
+    public Student student(){
+        return student;
     }
     
 }

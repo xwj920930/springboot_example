@@ -1,2 +1,30 @@
 # springboot_example
 springboot集成demo
+包含：
+admin监控
+aop
+异步
+缓存
+demo(读取配置文件/读取静态资源/事务)
+elasticsearch
+邮件
+excel
+异常
+过滤器
+freemarker
+覆盖率
+jwt
+kafka
+日志
+mock
+MongoDB
+mybatis plus
+观察者模式
+rabbitmq
+redis
+restTemplate
+定时任务
+swagger
+thymeleaf
+校验
+webSocket
