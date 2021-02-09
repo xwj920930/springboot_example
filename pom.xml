@@ -47,6 +47,7 @@
     <module>kafka</module>
     <module>demo</module>
     <module>rest</module>
+    <module>international</module>
   </modules>
 
   <properties>
