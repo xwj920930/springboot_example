@@ -2,6 +2,7 @@ package com.example.xwj.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  * 2.被catch处理了的异常，不会被事物作为判断依据
  * 3.阿里推荐的自动提交/手动回滚
  */
+//@Service 使用service注解会报错
 public class UserService {
     @Autowired
     DataSourceTransactionManager transactionManager;
